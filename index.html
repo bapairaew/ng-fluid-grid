@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <title>Fluid Grid</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+
+    .my-grid {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .my-block {
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+
+    .menu {
+      position: absolute;
+      height: 30px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-bottom: 1px solid #000;
+    }
+  </style>
+</head>
+<body ng-controller="AppController">
+  <div class="menu">
+    <button ng-click="addBlocks()">Add Block</button>
+  </div>
+  <fluid-grid class="my-grid" block-min-width="400" block-min-height="300" block-vertical-margin="1" block-horizontal-margin="1">
+    <fluid-grid-block ng-repeat="block in blocks" class="my-block" data-n="{{block}}">
+     <span ng-bind="block"></span>
+    </fluid-grid-block>
+  </fluid-grid>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+  <script src="ng-fluid-grid.min.js"></script>
+  <script>
+    angular.module('app', ['ngFluidGrid'])
+      .controller('AppController', [ '$scope', function ($scope) {
+        $scope.blocks = [];
+        $scope.addBlocks = function () {
+          $scope.blocks.push('grid #' + ($scope.blocks.length + 1));
+        };
+
+        (function generateBlocks(n) {
+          $scope.blocks.length = 0;
+          for (var i = 0; i < n; i++) {
+            $scope.blocks.push('grid #' + (i + 1));
+          }
+        })(1);
+      }]);
+  </script>
+</body>
