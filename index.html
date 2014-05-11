@@ -38,8 +38,8 @@
   <div class="menu">
     <button ng-click="addBlocks()">Add Block</button>
   </div>
-  <fluid-grid class="my-grid" block-min-width="400" block-min-height="300" block-vertical-margin="1" block-horizontal-margin="1">
-    <fluid-grid-block ng-repeat="block in blocks" class="my-block" data-n="{{block}}">
+  <fluid-grid class="my-grid" block-min-width="400" block-min-height="100" block-vertical-margin="1" block-horizontal-margin="1">
+    <fluid-grid-block ng-repeat="block in blocks">
      <span ng-bind="block"></span>
     </fluid-grid-block>
   </fluid-grid>

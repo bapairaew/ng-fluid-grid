@@ -84,14 +84,15 @@ angular.module('ngFluidGrid', [])
         }.bind(scope);
 
         var setSize = function (scope, size, totalBlocks) {
-          var blockWidth = size.width / totalBlocks;
-
-          // TODO: improve this
+          var col = totalBlocks;
           var row = 1;
-          while (blockWidth < minWidth) {
-            blockWidth = size.width / Math.floor(totalBlocks / row);
+          
+          while ((size.width / col) < +minWidth) {
             row++;
+            col = Math.ceil(totalBlocks / row);
           }
+
+          var blockWidth = size.width / col;
           var blockHeight = Math.max(size.height / row, minHeight);
 
           scope.blockWidth = (blockWidth - blockHorizontalMargin) + 'px';
